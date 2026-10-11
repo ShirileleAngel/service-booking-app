@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProBooking | Interactive Service App</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --muted: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+        body { background: var(--bg); color: var(--text); padding: 2rem 5%; }
+
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2.2rem; color: var(--primary); }
+        header p { color: var(--muted); }
+
+        /* Filter Buttons */
+        .filters { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn { padding: 0.5rem 1.2rem; border: 1px solid var(--muted); border-radius: 20px; background: transparent; cursor: pointer; transition: 0.2s; }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* App Grid Layout */
+        .app-container { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+        @media (max-width: 768px) { .app-container { grid-template-columns: 1fr; } }
+
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+        .service-card { background: var(--card-bg); padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .service-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .service-card .price { font-weight: 700; color: var(--primary); margin-bottom: 1rem; }
+        .add-btn { width: 100%; padding: 0.6rem; background: var(--primary); color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; }
+
+        /* Cart Sidebar */
+        .cart-box { background: var(--card-bg); padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; height: fit-content; position: sticky; top: 2rem; }
+        .cart-box h2 { font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 2px solid var(--bg); padding-bottom: 0.5rem; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; font-size: 0.95rem; }
+        .remove-btn { color: #ef4444; cursor: pointer; border: none; background: none; font-weight: bold; }
+        .total-price { font-size: 1.2rem; font-weight: 800; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid var(--bg); }
+        .checkout-btn { width: 100%; padding: 0.8rem; background: #10b981; color: white; border: none; border-radius: 4px; font-weight: 700; cursor: pointer; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ProBooking Studio</h1>
+        <p>Select services, build your custom package, and schedule instantly.</p>
+    </header>
+
+    <div class="filters" id="filterContainer">
+        <button class="filter-btn active" data-category="all">All Services</button>
+        <button class="filter-btn" data-category="express">Express</button>
+        <button class="filter-btn" data-category="full">Full Packages</button>
+        <button class="filter-btn" data-category="add-ons">Add-ons</button>
+    </div>
+
+    <div class="app-container">
+        <div class="services-grid" id="servicesGrid">
+            <!-- Services injected by JavaScript -->
+        </div>
+
+        <div class="cart-box">
+            <h2>Your Booking Summary</h2>
+            <div id="cartList">
+                <p style="color: var(--muted);">No services selected yet.</p>
+            </div>
+            <div class="total-price">Total: R<span id="totalAmount">0</span></div>
+            <button class="checkout-btn" onclick="checkout()">Confirm Booking</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
